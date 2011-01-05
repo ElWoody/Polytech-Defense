@@ -49,8 +49,10 @@ public class GameActivity extends Activity {
         // set false to disable FPS display, but don't delete fps_images.png!!
         //CCDirector.sharedDirector().setDisplayFPS(true);
 
+        CCDirector.sharedDirector().setScreenSize(480, 800);
+        
         // frames per second
-        CCDirector.sharedDirector().setAnimationInterval(1.0f / 35);
+        CCDirector.sharedDirector().setAnimationInterval(1.0f / 45);
 
         CCScene scene = TemplateLayer.scene();
         
@@ -99,6 +101,8 @@ public class GameActivity extends Activity {
         private BBVec2 directionBarreComputer;
         private int col = 11;
         private int returned = 11;
+        private float diffX;
+        private float diffY;
         private static float MAXSPEED = 15;
         
     	public static CCScene scene() {
@@ -205,21 +209,31 @@ public class GameActivity extends Activity {
                 returned = 0;
         }
         
+        public boolean checkDiff(float pos1, float pos2, float diff) {
+            if(pos1 == pos2 || (pos1 >= pos2 && pos1 <= pos2 + diff) || (pos1 <= pos2 && pos1 >= pos2 - diff))
+                return true;
+            return false;
+        }
+        
         public void update(float dt) {
             balle.setPosition(balle.getPosition().x + direction.x, balle.getPosition().y + direction.y);
            // while(barre.getPosition())
-            barre.setPosition(convertedLocation);
+            
+            
           //compare the distance to combined radii
             float dx = balle.getPosition().x - barre.getPosition().x;
             float dy = balle.getPosition().y - barre.getPosition().y;
             float radii = (balle.getContentSize().getWidth()* balle.getScaleX())/2 + (barre.getContentSize().getWidth()* barre.getScaleX())/2;
             if ( ( dx * dx )  + ( dy * dy ) < radii * radii
-                    || ( (dx - direction.x)  * (dx  - direction.x) )  + ((dy - direction.y)  * (dy  - direction.y) ) < radii * radii 
-                    || ( (dx + direction.x)  * (dx  + direction.x) )  + ((dy + direction.y)  * (dy  + direction.y) ) < radii * radii 
-                    || ( (dx - directionBarre.x)  * (dx - directionBarre.x) )  + ((dy - directionBarre.y)  * (dy  - directionBarre.y) ) < radii * radii 
+//                    || ( (dx - direction.x)  * (dx  - direction.x) )  + ((dy - direction.y)  * (dy  - direction.y) ) < radii * radii 
+//                    || ( (dx + direction.x)  * (dx  + direction.x) )  + ((dy + direction.y)  * (dy  + direction.y) ) < radii * radii 
+//                    || ( (dx - directionBarre.x)  * (dx - directionBarre.x) )  + ((dy - directionBarre.y)  * (dy  - directionBarre.y) ) < radii * radii 
                     //|| ( (dx + direction.x - directionBarre.x)  * (dx + direction.x - directionBarre.x) )  + ((dy + direction.y - directionBarre.y)  * (dy + direction.y  - directionBarre.y) ) < radii * radii 
                 )
                 direction.set(dx*0.1f + direction.x, dy*0.1f + direction.y);
+            else if(!checkDiff(barre.getPosition().x, convertedLocation.x, 1) && !checkDiff(barre.getPosition().y, convertedLocation.y, 1))
+                barre.setPosition(barre.getPosition().x + diffX, barre.getPosition().y + diffY);
+                
             
             
             
@@ -277,8 +291,10 @@ public class GameActivity extends Activity {
         public boolean ccTouchesMoved(MotionEvent event) {
             convertedLocation = CCDirector.sharedDirector()
                 .convertToGL(CGPoint.make(event.getX(), event.getY()));
+            convertedLocation.y += 50; 
             directionBarre.set(event.getX() - directionBarre.x, event.getY() - directionBarre.y);
-            
+            diffX = (convertedLocation.x - barre.getPosition().x)*0.2f;
+            diffY = (convertedLocation.y - barre.getPosition().y)*0.2f;
             return CCTouchDispatcher.kEventHandled;
         }
         
