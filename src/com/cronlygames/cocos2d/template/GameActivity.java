@@ -3,20 +3,17 @@ package com.cronlygames.cocos2d.template;
 //You touch my tralala 
 import org.box2d.common.BBVec2;
 import org.cocos2d.events.CCTouchDispatcher;
-import org.cocos2d.grid.CCTiledGrid3D;
 import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCLabel;
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.nodes.CCTextureCache;
-import org.cocos2d.nodes.CCTileMapAtlas;
 import org.cocos2d.opengl.CCGLSurfaceView;
 import org.cocos2d.types.CGPoint;
-import org.cocos2d.types.CGRect;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
@@ -119,11 +116,10 @@ public class GameActivity extends Activity {
             
         	this.setIsTouchEnabled(true);
 
-        
-            lbl = CCLabel.makeLabel("Hello World!", "DroidSans", 24);
+            lbl = CCLabel.makeLabel("Hello World!", "Courier", 24);
 
-            addChild(lbl, 0);
-            lbl.setPosition(CGPoint.ccp(160, 240));
+            addChild(lbl, 3);
+            lbl.setPosition(CGPoint.ccp(160, 20));
             
             balle = CCSprite.sprite("balle.png");
            
@@ -215,12 +211,12 @@ public class GameActivity extends Activity {
                 return true;
             return false;
         }
-        
+        private int  i =0; 
         public void update(float dt) {
             balle.setPosition(balle.getPosition().x + direction.x, balle.getPosition().y + direction.y);
            // while(barre.getPosition())
             
-            
+            lbl.setString("Position :("+balle.getPosition().x+" ; "+  balle.getPosition().y+")");
           //compare the distance to combined radii
             float dx = balle.getPosition().x - barre.getPosition().x;
             float dy = balle.getPosition().y - barre.getPosition().y;
