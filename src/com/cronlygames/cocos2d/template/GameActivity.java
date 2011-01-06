@@ -1,6 +1,10 @@
 package com.cronlygames.cocos2d.template;
+
+//Peter
 //Yeah baby ! ! !
 //You touch my tralala 
+//arnaud
+
 import org.box2d.common.BBVec2;
 import org.cocos2d.events.CCTouchDispatcher;
 import org.cocos2d.layers.CCLayer;
@@ -232,7 +236,7 @@ public class GameActivity extends Activity {
                 barre.setPosition(barre.getPosition().x + diffX, barre.getPosition().y + diffY);
                 
             
-            
+            //lol ici
             
             if(direction.x > MAXSPEED)
                 direction.x = MAXSPEED;
@@ -246,16 +250,27 @@ public class GameActivity extends Activity {
             
            
             if(balle.getPosition().y - balle.getTexture().getHeight()*balle.getScaleY()/2 < 0)
+            {
                 direction.y = -direction.y + 0.1f;
+                balle.setPosition(balle.getPosition().x + direction.x, balle.getPosition().y + direction.y + 1f);
+            }
             
             if(balle.getPosition().x - balle.getTexture().getWidth()*balle.getScaleY()/2 < 0)
+            {
                 direction.x = -direction.x + 0.1f;
+                balle.setPosition(balle.getPosition().x + direction.x + 1f, balle.getPosition().y + direction.y);
+            }
             
             if(balle.getPosition().x + balle.getTexture().getWidth()*balle.getScaleX()/2 > CCDirector.sharedDirector().winSize().getWidth())
+            {
                 direction.x = -direction.x - 0.1f;
-             
+                balle.setPosition(balle.getPosition().x + direction.x - 1f, balle.getPosition().y + direction.y);
+            }
             if(balle.getPosition().y + balle.getTexture().getWidth()*balle.getScaleX()/2 > CCDirector.sharedDirector().winSize().getHeight())
+            {
                 direction.y = -direction.y - 0.1f;
+                balle.setPosition(balle.getPosition().x + direction.x + 1f, balle.getPosition().y + direction.y - 1f);
+            }
           
             direction.set(direction.x*0.99f, direction.y*0.99f);
             
