@@ -236,7 +236,7 @@ public class GameActivity extends Activity {
                 barre.setPosition(barre.getPosition().x + diffX, barre.getPosition().y + diffY);
                 
             
-            
+            //lol ici
             
             if(direction.x > MAXSPEED)
                 direction.x = MAXSPEED;
