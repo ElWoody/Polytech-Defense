@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="12" height="8" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="herbe" tilewidth="32" tileheight="32">
+  <image source="herbe.png"/>
+ </tileset>
+ <tileset firstgid="2" name="sol" tilewidth="32" tileheight="32">
+  <image source="sol.png"/>
+ </tileset>
+ <layer name="Calque 1" width="12" height="8">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NkYGBgAmJGEjATkZhUM8lVT4wbcLHxmUmMekJ2EcIAqaZLWoABAAA=
+  </data>
+ </layer>
+</map>
