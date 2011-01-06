@@ -3,6 +3,7 @@ package com.cronlygames.cocos2d.template;
 //Peter
 //Yeah baby ! ! !
 //You touch my tralala 
+//arnaud
 
 
 //Raph
