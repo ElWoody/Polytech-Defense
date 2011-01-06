@@ -250,16 +250,27 @@ public class GameActivity extends Activity {
             
            
             if(balle.getPosition().y - balle.getTexture().getHeight()*balle.getScaleY()/2 < 0)
+            {
                 direction.y = -direction.y + 0.1f;
+                balle.setPosition(balle.getPosition().x + direction.x, balle.getPosition().y + direction.y + 1f);
+            }
             
             if(balle.getPosition().x - balle.getTexture().getWidth()*balle.getScaleY()/2 < 0)
+            {
                 direction.x = -direction.x + 0.1f;
+                balle.setPosition(balle.getPosition().x + direction.x + 1f, balle.getPosition().y + direction.y);
+            }
             
             if(balle.getPosition().x + balle.getTexture().getWidth()*balle.getScaleX()/2 > CCDirector.sharedDirector().winSize().getWidth())
+            {
                 direction.x = -direction.x - 0.1f;
-             
+                balle.setPosition(balle.getPosition().x + direction.x - 1f, balle.getPosition().y + direction.y);
+            }
             if(balle.getPosition().y + balle.getTexture().getWidth()*balle.getScaleX()/2 > CCDirector.sharedDirector().winSize().getHeight())
+            {
                 direction.y = -direction.y - 0.1f;
+                balle.setPosition(balle.getPosition().x + direction.x + 1f, balle.getPosition().y + direction.y - 1f);
+            }
           
             direction.set(direction.x*0.99f, direction.y*0.99f);
             
